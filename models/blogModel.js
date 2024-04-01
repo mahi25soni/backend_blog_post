@@ -13,38 +13,39 @@ const blogModel = new mongoose.Schema({
     },
     likes : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : likeModel,
+        ref : this.Likes,
     }],
     comments : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : commentModel
+        ref : this.Comments
     }]
 })
-const Blog = mongoose.model("Blog", blogModel);
+const Blog = mongoose.model("Blog", blogModel)
 
 const commentModel = new mongoose.Schema({
     post_id : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : blogModel
+        ref : Blog
     },
-    commented_by : string,
+    commented_by : String,
     body : String
 })
-const Comments = mongoose.model("Comments", commentModel);
+const Comments = mongoose.model("Comments", commentModel)
 
 
 const likeModel = new mongoose.Schema({
     post_id : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : blogModel
+        ref : Blog
     },
-    liked_by : string
+    liked_by : String
 })
 const Likes = mongoose.model("Likes", likeModel);
 
 
 module.exports = {
     Blog,
-    Comments,
-    Likes
+    Likes,
+    Comments
 }
+

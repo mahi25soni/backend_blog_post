@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}));
 
-app.use("api/v1/", BlogRoutes)
+app.use("/api/v1/", BlogRoutes)
 
 app.get("/", (req, res)=> {
     res.send("Welcome to the home page")
