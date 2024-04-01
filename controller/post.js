@@ -1,0 +1,1 @@
+const {Blog, Comments, Likes} = require("./mode")

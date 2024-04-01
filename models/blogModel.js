@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 
-const userModel  = new mongoose.Schema({
-    name : String,
-
-})
 
 const blogModel = new mongoose.Schema({
     title : {
@@ -24,26 +20,31 @@ const blogModel = new mongoose.Schema({
         ref : commentModel
     }]
 })
+const Blog = mongoose.model("Blog", blogModel);
 
 const commentModel = new mongoose.Schema({
     post_id : {
         type : mongoose.Schema.Types.ObjectId,
         ref : blogModel
     },
-    commented_by : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : userModel
-    },
+    commented_by : string,
     body : String
 })
+const Comments = mongoose.model("Comments", commentModel);
+
 
 const likeModel = new mongoose.Schema({
     post_id : {
         type : mongoose.Schema.Types.ObjectId,
         ref : blogModel
     },
-    liked_by : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : userModel
-    }
+    liked_by : string
 })
+const Likes = mongoose.model("Likes", likeModel);
+
+
+module.exports = {
+    Blog,
+    Comments,
+    Likes
+}
