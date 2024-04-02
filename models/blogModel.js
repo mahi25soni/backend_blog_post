@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 
+
 const blogModel = new mongoose.Schema({
     title : {
         type : String,
@@ -13,11 +14,11 @@ const blogModel = new mongoose.Schema({
     },
     likes : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : this.Likes,
+        ref : "Likes",
     }],
     comments : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : this.Comments
+        ref : "Comments"
     }]
 })
 const Blog = mongoose.model("Blog", blogModel)
@@ -25,7 +26,7 @@ const Blog = mongoose.model("Blog", blogModel)
 const commentModel = new mongoose.Schema({
     post_id : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : Blog
+        ref : "Blog"
     },
     commented_by : String,
     body : String
@@ -36,7 +37,7 @@ const Comments = mongoose.model("Comments", commentModel)
 const likeModel = new mongoose.Schema({
     post_id : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : Blog
+        ref : "Blog"
     },
     liked_by : String
 })
