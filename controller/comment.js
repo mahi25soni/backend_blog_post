@@ -8,7 +8,7 @@ const createComment = async(req, res) => {
 
         // console.log("The new comments is ", new_comment)
 
-        await Blog.findByIdAndUpdate(post_id, {$push : {comments : new_comment._id}}).exec();
+        const updated_one = await Blog.findByIdAndUpdate(post_id, {$push : {comments : new_comment._id}}, {new : true}).exec();
 
         res.status(500).json({
             Message : "Comment posted",

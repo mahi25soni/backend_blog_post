@@ -10,7 +10,6 @@ router.get("/post/comments/:post_id/", getAllComments);
 
 
 router.post("/comment/create/", createComment);
-// router.get("/comment/:post_id", allComments)
 
 
 module.exports = router;
