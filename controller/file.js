@@ -2,6 +2,8 @@ const Files  = require("../models/fileModel")
 const cloudinary = require("cloudinary")
 
 
+
+
 const fileSaveToLocal = async(req, res) => {
     try{
 
@@ -23,15 +25,13 @@ const fileSaveToLocal = async(req, res) => {
     }
 }
 
-
-
-async function uploadImageToCloud (file, quality)  {
+async function uploadImageToCloud (filepath)  {
     const options = {
         folder : "Babbar",
         resource_type : "auto",
     }
-
-    return await cloudinary.uploader.upload(file.tempFilePath,"Babbar", options); // I don't know why but dono baar folder declare karna padd raha hai yaha pei
+    console.log("yaha tak toh aa gaya fir fatt gata")
+    return await cloudinary.uploader.upload(filepath,"Babbar", options); // I don't know why but dono baar folder declare karna padd raha hai yaha pei
 }
 const uploadImage = async(req, res) => {
     try{
@@ -55,7 +55,7 @@ const uploadImage = async(req, res) => {
 
 
         console.log(currentFile)
-        const upload_image = await uploadImageToCloud(currentFile, "30");
+        const upload_image = await uploadImageToCloud(currentFile.tempFilePath);
 
         console.log(upload_image)
 
@@ -123,8 +123,41 @@ const uploadVideo = async(req, res) => {
     } 
 }
 
+
+const multerImage = async(req, res) => {
+
+    try{
+        const files = req.files;
+        console.log(files)
+
+        const upload_image = await uploadImageToCloud(file.path);
+        res.status(200).json({
+            success : true,
+            message : "Image uploaded successfully!"
+        })
+    }
+    catch(error) {
+        return res.status(500).json({
+            success : false,
+            message : "Internal server error while uploading video"
+        })
+    }
+}
+const multerVideo = async (req, res) => {
+    try{
+
+    } catch(error) {
+        return res.status(500).json({
+            success : false,
+            message : "Internal server error while uploading video"
+        })
+    }
+}
+
 module.exports = {
     fileSaveToLocal,
     uploadImage,
-    uploadVideo
+    uploadVideo,
+    multerImage,
+    multerVideo
 }
