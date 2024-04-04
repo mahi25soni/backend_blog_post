@@ -5,7 +5,7 @@ const cloudinary = require("cloudinary")
 const fileSaveToLocal = async(req, res) => {
     try{
 
-        const data = req.files.your_fil
+        const data = req.files.your_file
         const path = __dirname + "/files/" + Date.now() + `.${data.name.split(".")[1]}`;
         data.mv(path, (err) => {
             if(err) {
@@ -29,10 +29,8 @@ async function uploadImageToCloud (file, quality)  {
     const options = {
         folder : "Babbar",
         resource_type : "auto",
-        quality_override : quality
     }
 
-    console.log("The shit is ", options)
     return await cloudinary.uploader.upload(file.tempFilePath,"Babbar", options); // I don't know why but dono baar folder declare karna padd raha hai yaha pei
 }
 const uploadImage = async(req, res) => {
